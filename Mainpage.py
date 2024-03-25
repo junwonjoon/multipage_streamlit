@@ -16,7 +16,7 @@ def displayDelta(stocksTicker:str, startday:str, endday:str) ->None:
             st.metric(label=f"{stocksTicker} compared to yesterday", value=average_stock_price[-1], delta=delta_to_print)
     
 today = datetime.datetime.now() - datetime.timedelta(days=1)
-two_days_ago = datetime.datetime.now() - datetime.timedelta(days=3)
+two_days_ago = datetime.datetime.now() - datetime.timedelta(days=7)
 
 displayDelta("AAPL", str(two_days_ago.strftime('%Y-%m-%d')), str(today.strftime('%Y-%m-%d')))
 displayDelta("GOOGL", str(two_days_ago.strftime('%Y-%m-%d')), str(today.strftime('%Y-%m-%d')))
