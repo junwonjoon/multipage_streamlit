@@ -82,6 +82,7 @@ if "user_input" not in st.session_state:
 
 if st.button("Save", type="primary"):
     try:
+        st.session_state["name_of_company"] = dict_stocksTicker
         st.session_state["user_input"] = generate_stock_dictionary(
             dict_stocksTicker, 
             timespan_multiplier_select, 
@@ -92,6 +93,7 @@ if st.button("Save", type="primary"):
     except KeyError as e:
         st.error(f"Saving error have occured: Please refresh the page and try again")
         st.session_state["user_input"] = ""
+        st.session_state["name_of_company"] = ""
     else:
         st.write("Your choice have been saved, now navigate to different page to view your results")
 
