@@ -4,7 +4,7 @@ import datetime
 import pandas as pd
 
 def generate_stockdictionary(dict_stocksTicker:dict, timespan_multiplier_select:int, timespan_select:str,
-                   start_date_select:datetime, end_date_select:datetime) -> dict:
+                   start_date_select:datetime, end_date_select:datetime, key) -> dict:
     stocksTicker = dict_stocksTicker[stocksTicker_select]
     multiplier = timespan_multiplier_select
     timespan = timespan_select
@@ -41,8 +41,7 @@ dict_stocksTicker ={"Apple Inc.": "AAPL",
                     "Walmart Inc.": "WMT",
                      "Visa Inc.": "V"}
 
-# key = st.secrets["API_KEY"]
-key = "c4NLm5QgWNWDBWp530A_Ypnxc6PHmmtD"
+key = st.secrets["API_KEY"]
 stocksTicker_select = st.radio(
     "What stock price do you want to see?",
     [key for key in dict_stocksTicker.keys()])
