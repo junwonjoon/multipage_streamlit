@@ -3,8 +3,8 @@ from requests import get
 import datetime
 import pandas as pd
 
-def generate_stockdictionary(dict_stocksTicker:dict, timespan_multiplier_select:int, timespan_select:str,
-                   start_date_select:datetime, end_date_select:datetime) -> dict:
+def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select:int, timespan_select:str,
+                   start_date_select:datetime, end_date_select:datetime, key) -> dict:
     stocksTicker = dict_stocksTicker[stocksTicker_select]
     multiplier = timespan_multiplier_select
     timespan = timespan_select
@@ -29,7 +29,7 @@ def generate_stockdictionary(dict_stocksTicker:dict, timespan_multiplier_select:
         }
         return pd.DataFrame(data)
 
-st.title("Stock Price!")
+st.title("Stock Price Table Generator")
 dict_stocksTicker ={"Apple Inc.": "AAPL",
                     "Microsoft Corporation": "MSFT",
                     "Amazon.com, Inc.": "AMZN",
@@ -40,11 +40,14 @@ dict_stocksTicker ={"Apple Inc.": "AAPL",
                     "Johnson & Johnson": "JNJ",
                     "Walmart Inc.": "WMT",
                      "Visa Inc.": "V"}
-
 key = st.secrets["API_KEY"]
+
+st.subheader("Select the company")
 stocksTicker_select = st.radio(
     "What stock price do you want to see?",
     [key for key in dict_stocksTicker.keys()])
+
+st.subheader("Select the time period")
 
 end_date_select = st.date_input("When should be the end date?", 
                                 datetime.datetime.now() - datetime.timedelta(days=1), 
@@ -57,22 +60,20 @@ start_date_select = st.date_input("When should be the start date?", datetime.dat
                                   max_value= end_date_select)
 st.write("The start date is", start_date_select)
 
-
-
+st.subheader("Select the time increment")
 timespan_select = st.select_slider(
     'Select the timespan',
     options=['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'],
     value=('day'))
 st.write('You selected timespan as ', timespan_select)
 
-
+st.subheader("Select the multiplier for the timespan")
 timespan_multiplier_select = st.number_input('Enter the timespan multiplier', 1, step = 1)
 st.write('Timespan multiplier is:', timespan_multiplier_select)
 
 if st.button("Generate Table", type="primary"):
-    data = generate_stockdictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select)
+    data = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
     df = pd.DataFrame(data)
-    st.table(df)
     df.set_index('Time', inplace=True)
     st.line_chart(df, color = '#ef4423')
 
