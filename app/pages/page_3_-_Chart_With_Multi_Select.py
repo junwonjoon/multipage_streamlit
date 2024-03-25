@@ -32,7 +32,6 @@ def generate_stock_dictionary(dict_stocks_ticker_: dict, stocks_ticker_select: s
             " by increasing the multiplier or decrease the date difference")
         exit()
     else:
-        st.write(json_data)
         average_stock_price = [element["vw"] for element in json_data["results"]]
         the_date_milliseconds = [element["t"] for element in json_data["results"]]
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element
@@ -65,10 +64,15 @@ else:
         keys = list(dfs[0].keys())
         # This line and below is from chatGPT
         try:
+            if len(dfs) > 1 and dfs[0]["count"] != dfs[1]["count"]:
+                assert False
             data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
+
         except KeyError:
             st.write("Error in converting the data, please try again a minute later!")
             exit()
+        except AssertionError:
+            st.write("Error loading a json of multiple companies, please try again a minute later!")
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
             st.line_chart(df)
