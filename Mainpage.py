@@ -96,8 +96,8 @@ if st.button("Save", type="primary"):
         st.session_state["name_of_company"] = ""
     else:
         st.write("Your choice have been saved, now navigate to different page to view your results")
-        st.page_link("Page_1_-_Table_Generator.py", label="Table", icon="📊")
-        st.page_link("page_2_-_Chart_Generator.py", label="Chart", icon="📈")
+        st.page_link("pages/Page_1_-_Table_Generator.py", label="Table", icon="📊")
+        st.page_link("pages/page_2_-_Chart_Generator.py", label="Chart", icon="📈")
 
 
 
