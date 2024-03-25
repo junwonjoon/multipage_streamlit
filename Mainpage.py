@@ -10,7 +10,8 @@ st.set_page_config(
     page_icon = ":)"
 )
 def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select:int, timespan_select:str,
-                   start_date_select:datetime, end_date_select:datetime, key) -> dict:
+                   start_date_select:datetime, end_date_select:datetime) -> dict:
+    key = st.secrets["API_KEY"]
     stocksTicker = dict_stocksTicker[stocksTicker_select]
     multiplier = timespan_multiplier_select
     timespan = timespan_select
@@ -23,12 +24,9 @@ def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select
     elif json_data["status"] == "NOT_AUTHORIZED":
         st.write("Sorry, the range you have assigned contain too many steps! Please reduce the range of steps by increasing the multiplier or decrease the date difference")
     else:
-        # st.write(json_data)
         average_stock_price = [element["vw"] for element in json_data["results"]]
         the_date_miliseconds = [element["t"] for element in json_data["results"]]
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element in the_date_miliseconds]
-        # st.write(average_stock_price)
-        # st.write(human_readable_date)
         data = {
         'Time': pd.to_datetime(human_readable_date),
         f'Average Stock Price of the {timespan}': average_stock_price
@@ -61,7 +59,6 @@ dict_stocksTicker ={"Apple Inc.": "AAPL",
                     "Johnson & Johnson": "JNJ",
                     "Walmart Inc.": "WMT",
                      "Visa Inc.": "V"}
-key = st.secrets["API_KEY"]
 
 st.subheader("Select the company")
 stocksTicker_select = st.radio(
@@ -97,6 +94,6 @@ if "user_input" not in st.session_state:
     st.session_state["user_input"] = ""
 
 if st.button("Save", type="primary"):
-    st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
+    st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select)
 
 
