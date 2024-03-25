@@ -6,8 +6,7 @@ def displayDelta(stocksTicker:str, startday:str, endday:str) ->None:
     key = st.secrets["API_KEY_MAINPAGE"]
     json_data = get(f"https://api.polygon.io/v2/aggs/ticker/{stocksTicker}/range/1/day/{startday}/{endday}?apiKey={key}").json()
     if json_data["status"] == "ERROR":
-        pass
-    elif json_data["status"] == "NOT_AUTHORIZED":
+        st.header("Hi welcome to the stocks page")
         pass
     else:
         average_stock_price = [element["vw"] for element in json_data["results"]]
