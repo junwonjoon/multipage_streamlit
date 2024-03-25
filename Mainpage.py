@@ -92,7 +92,7 @@ st.write('Timespan multiplier is:', timespan_multiplier_select)
 if "user_input" not in st.session_state:
     st.session_state["user_input"] = ""
 
-if st.button("Generate Chart", type="primary"):
+if st.button("Save", type="primary"):
     st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
 
 
