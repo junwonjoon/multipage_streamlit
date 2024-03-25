@@ -82,7 +82,7 @@ if "user_input" not in st.session_state:
 
 if st.button("Save", type="primary"):
     try:
-        st.session_state["name_of_company"] = dict_stocksTicker
+        st.session_state["name_of_company"] = stocksTicker_select
         st.session_state["user_input"] = generate_stock_dictionary(
             dict_stocksTicker, 
             timespan_multiplier_select, 
