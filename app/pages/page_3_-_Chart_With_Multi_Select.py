@@ -44,7 +44,7 @@ st.header("Welcome to the Multi Select Chart Generator")
 try:
     list_of_user_input = st.session_state["list_of_inputs"]
     for items in list_of_user_input:
-        assert items is None
+        assert items is not None
 except KeyError:
     st.error('The requested key does not exist in the session state.\n'
              'Please go back to the main page to save your preference')
