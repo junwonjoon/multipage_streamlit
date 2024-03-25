@@ -43,10 +43,16 @@ else:
         [keys for keys in dict_stocksTicker.keys()],
         default = list_of_user_input[1], max_selections = 3,)
 
-    if st.button("Generate plot", type="primary"):
-        list_of_dict_stocks = []
-        for items in options:
-            list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0], items, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5]))
-        st.write(type(list_of_dict_stocks[0]))
-        df = pd.DataFrame(elem for elem in list_of_dict_stocks)
-        st.line_chart(df, columns=["a", "b", "c"])
+    if st.button("Generate plot"):
+        dfs = []  # List to store DataFrames
+        for item in options:
+            df = generate_stock_dictionary(dict_stocksTicker, item, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5])
+            dfs.append(df)
+
+        if dfs:
+            # Combine all DataFrames on 'Time' column
+            combined_df = pd.concat(dfs, axis=1)
+            combined_df = combined_df.loc[:,~combined_df.columns.duplicated()]  # Remove duplicate 'Time' columns if any
+            st.line_chart(combined_df.set_index('Time'))
+        else:
+            st.write("No data to display.")
