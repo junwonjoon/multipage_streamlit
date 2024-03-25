@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import datetime
 from Mainpage import generate_stock_dictionary, dict_stocksTicker
 
 
