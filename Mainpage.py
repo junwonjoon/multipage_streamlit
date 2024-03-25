@@ -1,4 +1,3 @@
-import streamlit as st
 from requests import get
 import datetime
 import streamlit as st
