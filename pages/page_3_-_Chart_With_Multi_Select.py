@@ -17,7 +17,6 @@ options = st.multiselect(
 st.write('You selected:', options)
 list_of_dict_stocks = []
 for items in options:
-    list_of_dict_stocks.append(generate_stock_dictionary(dict_stocksTicker,items,
-    timespan_multiplier_select, timespan_select,start_date_select, end_date_select))
+    list_of_dict_stocks.append(generate_stock_dictionary(dict_stocksTicker,items, timespan_multiplier_select, timespan_select,start_date_select, end_date_select))
 
 st.write(list_of_dict_stocks)
