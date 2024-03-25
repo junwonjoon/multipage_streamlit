@@ -8,7 +8,7 @@ import streamlit as st
 import pandas as pd
 import datetime
 from requests import get
-from app.Mainpage import dict_stocks_ticker
+from Mainpage import dict_stocks_ticker
 
 
 # It is little different from the main page
