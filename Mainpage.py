@@ -97,7 +97,7 @@ if "user_input" not in st.session_state:
 
 if st.button("Save", type="primary"):
     st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
-
+    st.write("Your choice have been saved, now navigate to different page to view your results")
 
 # today = datetime.datetime.now()
 # two_days_ago = datetime.datetime.now() - datetime.timedelta(days=7)
