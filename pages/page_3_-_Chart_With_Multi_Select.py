@@ -49,5 +49,4 @@ else:
             list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0], items, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5]))
         st.write(type(list_of_dict_stocks[0]))
         df = pd.DataFrame(list_of_dict_stocks)
-        df.set_index('Time', inplace=True)
-        st.line_chart(df)
+        st.line_chart(df, columns=["a", "b", "c"])
