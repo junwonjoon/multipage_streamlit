@@ -41,15 +41,12 @@ else:
     options = st.multiselect(
         'Select the prices that you want to compare',
         [keys for keys in dict_stocksTicker.keys()],
-        default = list_of_user_input[1], max_selections = 3,
-        )
-    st.write('You selected:', options)
-    list_of_dict_stocks = []
+        default = list_of_user_input[1], max_selections = 3,)
 
     if st.button("Generate plot", type="primary"):
+        list_of_dict_stocks = []
         for items in options:
-            list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0],items, list_of_user_input[2], list_of_user_input[3],list_of_user_input[4], list_of_user_input[5]))
-        
+            list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0], items, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5]))
         df = pd.DataFrame([dict for dict in list_of_dict_stocks])
         df.set_index('Time', inplace=True)
         st.line_chart(df)
