@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
+from requests import get
 from Mainpage import dict_stocksTicker
 
 def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
