@@ -10,8 +10,7 @@ st.set_page_config(
     page_icon = ":)"
 )
 def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
-                   start_date_select:datetime, end_date_select:datetime) -> dict:
-    key = st.secrets["API_KEY"]
+                   start_date_select:datetime, end_date_select:datetime, key:str = st.secrets["API_KEY"]) -> dict:
     stocksTicker = dict_stocksTicker[stocksTicker_select]
     multiplier = timespan_multiplier_select
     timespan = timespan_select
@@ -91,10 +90,18 @@ if st.button("Save", type="primary"):
             start_date_select, 
             end_date_select
         )
+        st.session_state["list_of_inputs"] = [dict_stocksTicker, 
+            stocksTicker_select,
+            timespan_multiplier_select, 
+            timespan_select,
+            start_date_select, 
+            end_date_select]
+        
     except KeyError as e:
         st.error(f"Saving error have occured: Please refresh the page and try again")
         st.session_state["user_input"] = ""
         st.session_state["name_of_company"] = ""
+        st.session_state["list_of_inputs"] = ""
     else:
         st.write("Your choice have been saved, now navigate to different page to view your results")
         st.page_link("pages/Page_1_-_Table_Generator.py", label="Table", icon="📊")
