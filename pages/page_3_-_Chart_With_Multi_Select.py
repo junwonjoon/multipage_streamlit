@@ -23,7 +23,7 @@ def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, t
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element in the_date_miliseconds]
         data = {
         'Time': pd.to_datetime(human_readable_date),
-        f'Average Stock Price of the {timespan}': average_stock_price
+        "price": average_stock_price
         }
         return data
     
@@ -48,11 +48,6 @@ else:
         for item in options:
             df = generate_stock_dictionary(dict_stocksTicker, item, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5])
             dfs.append(df)
+        st.write(pd.DataFrame(dfs))
 
-        if dfs:
-            # Combine all DataFrames on 'Time' column
-            combined_df = pd.concat(dfs, axis=1)
-            combined_df = combined_df.loc[:,~combined_df.columns.duplicated()]  # Remove duplicate 'Time' columns if any
-            st.line_chart(combined_df.set_index('Time'))
-        else:
-            st.write("No data to display.")
+       
