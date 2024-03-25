@@ -79,8 +79,6 @@ else:
         except KeyError:
             st.write("Error in converting the data, please try again a minute later!")
             exit()
-        except AssertionError:
-            st.write("Error loading a json of multiple companies, please try again a minute later!")
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
             st.line_chart(df)
