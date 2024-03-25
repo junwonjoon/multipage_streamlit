@@ -2,6 +2,11 @@ import streamlit as st
 from requests import get
 import datetime
 
+st.set_page_config(
+    page_title="Multipage App",
+    page_icon = ":)"
+)
+
 # def displayDelta(stocksTicker:str, startday:str, endday:str) ->None:
 #     key = st.secrets["API_KEY_MAINPAGE"]
 #     json_data = get(f"https://api.polygon.io/v2/aggs/ticker/{stocksTicker}/range/1/day/{startday}/{endday}?apiKey={key}").json()
@@ -16,10 +21,6 @@ import datetime
 #             st.metric(label=f"{stocksTicker} compared to yesterday", value=average_stock_price[-1], delta=delta_to_print)
 st.title("Main Page")
 
-st.set_page_config(
-    page_title="Multipage App",
-    page_icon = ":)"
-)
 st.sidebar.success("Select a page above.")
 
 # today = datetime.datetime.now() - datetime.timedelta(days=1)
