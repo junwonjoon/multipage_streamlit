@@ -1,5 +1,4 @@
 import streamlit as st
-from requests import get
 import pandas as pd
 
 st.header("Welcome to the chart generator")
@@ -11,7 +10,8 @@ except KeyError:
              'Please go back to the main page to save your preference or try sometime later')
 else:
     df2.set_index('Time', inplace=True)
-    st.line_chart(df2, color = '#ef4423')
+    st.line_chart(df2)
+
 
 
 

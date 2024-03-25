@@ -34,17 +34,6 @@ def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select
         st.write("Your choice have been saved, now navigate to different page to view your results")
         return pd.DataFrame(data)
 
-# def displayDelta(stocksTicker:str, startday:str, endday:str) ->None:
-#     key = st.secrets["API_KEY_MAINPAGE"]
-#     json_data = get(f"https://api.polygon.io/v2/aggs/ticker/{stocksTicker}/range/1/day/{startday}/{endday}?apiKey={key}").json()
-#     if json_data["status"] == "ERROR":
-#         st.header("Hi welcome to the stocks page")
-#         return 0
-#     else:
-#         average_stock_price = [element["vw"] for element in json_data["results"]]
-#         if len(average_stock_price) > 2:
-#             delta_to_print = float(average_stock_price[-1]) - float(average_stock_price[-2])
-#             st.metric(label=f"{stocksTicker} compared to yesterday", value=average_stock_price[-1], delta=delta_to_print)
 st.title("Main Page")
 st.sidebar.success("Select a page above.")
 
@@ -103,6 +92,6 @@ if st.button("Save", type="primary"):
             end_date_select
         )
     except KeyError as e:
-        st.error(f"A KeyError occurred: {e}\n Please refresh the page and try again")
+        st.error(f"Saving error have occured: Please refresh the page and try again")
         st.session_state["user_input"] = ""
 
