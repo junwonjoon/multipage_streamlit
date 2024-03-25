@@ -1,3 +1,9 @@
+"""
+This is a page 2
+Author: Wonjoon Jun
+Date: Mar 25, 2024
+Please view README.md for more information.
+"""
 import streamlit as st
 import pandas as pd
 

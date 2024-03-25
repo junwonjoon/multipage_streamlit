@@ -1,3 +1,9 @@
+"""
+Welcome to the main page
+Author: Wonjoon Jun
+Date: Mar 25, 2024
+Please view README.md for more information.
+"""
 from requests import get
 import datetime
 import streamlit as st

@@ -1,8 +1,14 @@
+"""
+This is a page 3
+Author: Wonjoon Jun
+Date: Mar 25, 2024
+Please view README.md for more information.
+"""
 import streamlit as st
 import pandas as pd
 import datetime
 from requests import get
-from Mainpage import dict_stocks_ticker
+from app.Mainpage import dict_stocks_ticker
 
 
 # It is little different from the main page
