@@ -17,12 +17,9 @@ def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select
     elif json_data["status"] == "NOT_AUTHORIZED":
         st.write("Sorry, the range you have assigned contain too many steps! Please reduce the range of steps by increasing the multiplier or decrease the date difference")
     else:
-        # st.write(json_data)
         average_stock_price = [element["vw"] for element in json_data["results"]]
         the_date_miliseconds = [element["t"] for element in json_data["results"]]
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element in the_date_miliseconds]
-        # st.write(average_stock_price)
-        # st.write(human_readable_date)
         data = {
         'Time': pd.to_datetime(human_readable_date),
         f'Average Stock Price of the {timespan}': average_stock_price
@@ -71,7 +68,7 @@ st.subheader("Select the multiplier for the timespan")
 timespan_multiplier_select = st.number_input('Enter the timespan multiplier', 1, step = 1)
 st.write('Timespan multiplier is:', timespan_multiplier_select)
 
-if st.button("Generate Table", type="primary"):
+if st.button("Generate Chart", type="primary"):
     data = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
     df = pd.DataFrame(data)
     df.set_index('Time', inplace=True)
