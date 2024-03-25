@@ -35,7 +35,7 @@ def generate_stock_pandas(dict_stocksTicker:dict, stocksTicker_select:str, times
         return pd.DataFrame(data)
 
 st.title("Main Page")
-st.captions("Please keep that in mind that this uses a free API, therefore if you make too many request under one minute, the program might not function. Also, please keep that in mind that using multichart is one API call per selection!")
+st.caption("Please keep that in mind that this uses a free API, therefore if you make too many request under one minute, the program might not function. Also, please keep that in mind that using multichart is one API call per selection!")
 
 dict_stocksTicker ={"Apple Inc.": "AAPL",
                     "Microsoft Corporation": "MSFT",
