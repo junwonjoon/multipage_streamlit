@@ -51,7 +51,7 @@ else:
         data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         # Create a DataFrame
         df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
-        st.line_chart(df, y=[companies for companies in options])
+        st.line_chart(df, y=["red","blue"])
 
 
         
