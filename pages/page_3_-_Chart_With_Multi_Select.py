@@ -49,12 +49,17 @@ else:
             dfs.append(df)
         keys = list(dfs[0].keys())
         #This line and below is from chatGPT
-        data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
-        df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
-        st.line_chart(df)
-        st.write(f"series{i} = {options[i]}" for i in range(len(options)))
+        try:
+            data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
+        except KeyError:
+                st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
+                exit()
+        else:
+            df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
+            st.line_chart(df)
+            st.write(f"series{i} = {options[i]}" for i in range(len(options)))
 
 
-        
+            
 
        
