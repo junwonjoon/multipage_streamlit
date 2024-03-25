@@ -64,10 +64,9 @@ else:
         keys = list(dfs[0].keys())
         # This line and below is from chatGPT
         try:
-            if len(dfs) > 1 and dfs[0]["count"] != dfs[1]["count"]:
-                assert False
+            # if len(dfs) > 1 and dfs[0]["count"] != dfs[1]["count"]:
+            #     assert False
             data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
-
         except KeyError:
             st.write("Error in converting the data, please try again a minute later!")
             exit()
