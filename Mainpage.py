@@ -29,7 +29,7 @@ def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element in the_date_miliseconds]
         data = {
         'Time': pd.to_datetime(human_readable_date),
-        f'Average Stock Price of the {timespan}': average_stock_price
+        f'Average Stock Price of the {timespan} for {stocksTicker_select}': average_stock_price
         }
         st.write("Your choice have been saved, now navigate to different page to view your results")
         return pd.DataFrame(data)
