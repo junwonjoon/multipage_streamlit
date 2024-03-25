@@ -52,7 +52,7 @@ else:
         try:
             data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         except KeyError:
-                st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
+                st.write("Error in converting the data, please try again a minute later!")
                 exit()
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
