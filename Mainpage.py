@@ -17,8 +17,8 @@ today = datetime.datetime.now() - datetime.timedelta(days=1)
 two_days_ago = datetime.datetime.now() - datetime.timedelta(days=3)
 key = st.secrets["API_KEY"]
 
-displayDelta("aapl", two_days_ago.strftime('%Y-%m-%d'), today.strftime('%Y-%m-%d'), key)
-displayDelta("googl", two_days_ago.strftime('%Y-%m-%d'), today.strftime('%Y-%m-%d'), key)
+displayDelta("AAPL", two_days_ago.strftime('%Y-%m-%d'), today.strftime('%Y-%m-%d'), key)
+displayDelta("GOOGL", two_days_ago.strftime('%Y-%m-%d'), today.strftime('%Y-%m-%d'), key)
 
 st.set_page_config(
     page_title="Multipage App",
