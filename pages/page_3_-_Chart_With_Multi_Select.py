@@ -8,7 +8,7 @@ options = st.multiselect(
     'Select the prices that you want to compare',
     [keys for keys in dict_stocksTicker.keys()],
     default = None, max_selections = 3,
-    placeholder = st.session_state["name_of_company"])
+    )
 
 st.write('You selected:', options)
 
