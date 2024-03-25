@@ -2,7 +2,8 @@ import streamlit as st
 from requests import get
 import pandas as pd
 
-st.header("Welcome to the table generator")
+st.header("Welcome to The Table Generator")
+st.subheader(f"Here is a table displaying information about {st.session_state["name_of_company"]}")
 try:
     df = pd.DataFrame(st.session_state["user_input"])
 except KeyError:

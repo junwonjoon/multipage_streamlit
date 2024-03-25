@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-st.header("Welcome to the chart generator")
+st.header("Welcome to the Chart Generator")
+st.subheader(f"Here is a chart displaying information about {st.session_state["name_of_company"]}")
 try:
     df = pd.DataFrame(st.session_state["user_input"])
 except KeyError:
