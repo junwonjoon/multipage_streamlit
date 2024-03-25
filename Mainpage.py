@@ -89,8 +89,6 @@ timespan_multiplier_select = st.number_input('Enter the timespan multiplier', 1,
 st.write('Timespan multiplier is:', timespan_multiplier_select)
 
 
-data = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
-
 if "user_input" not in st.session_state:
     st.session_state["user_input"] = ""
 
