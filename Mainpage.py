@@ -34,7 +34,6 @@ def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select
         return pd.DataFrame(data)
 
 st.title("Main Page")
-st.sidebar.success("Select a page above.")
 
 
 dict_stocksTicker ={"Apple Inc.": "AAPL",
