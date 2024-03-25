@@ -9,7 +9,7 @@ st.set_page_config(
     page_title="Multipage App",
     page_icon = ":)"
 )
-def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
+def generate_stock_pandas(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
                    start_date_select:datetime, end_date_select:datetime, key:str = st.secrets["API_KEY"]) -> dict:
     stocksTicker = dict_stocksTicker[stocksTicker_select]
     multiplier = timespan_multiplier_select
@@ -82,7 +82,7 @@ if "user_input" not in st.session_state:
 if st.button("Save", type="primary"):
     try:
         st.session_state["name_of_company"] = stocksTicker_select
-        st.session_state["user_input"] = generate_stock_dictionary(
+        st.session_state["user_input"] = generate_stock_pandas(
             dict_stocksTicker, 
             stocksTicker_select,
             timespan_multiplier_select, 

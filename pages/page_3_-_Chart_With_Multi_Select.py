@@ -4,7 +4,7 @@ import datetime
 from requests import get
 from Mainpage import dict_stocksTicker
 
-#It didn't work when I imported from mainpage
+#It is little different from the mainpage 
 def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
                    start_date_select:datetime, end_date_select:datetime, key:str = st.secrets["API_KEY"]) -> dict:
     stocksTicker = dict_stocksTicker[stocksTicker_select]
@@ -25,7 +25,7 @@ def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, t
         'Time': pd.to_datetime(human_readable_date),
         f'Average Stock Price of the {timespan}': average_stock_price
         }
-        return pd.DataFrame(data)
+        return data
     
 st.header("Welcome to the Multi Select Chart Generator")
 try:
