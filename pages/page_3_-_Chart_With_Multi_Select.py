@@ -4,6 +4,7 @@ import datetime
 from requests import get
 from Mainpage import dict_stocksTicker
 
+#It didn't work when I imported from mainpage
 def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
                    start_date_select:datetime, end_date_select:datetime, key:str = st.secrets["API_KEY"]) -> dict:
     stocksTicker = dict_stocksTicker[stocksTicker_select]
@@ -11,7 +12,6 @@ def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, t
     timespan = timespan_select
     from_date = start_date_select
     to_date = end_date_select
-
     json_data = get(f"https://api.polygon.io/v2/aggs/ticker/{stocksTicker}/range/{multiplier}/{timespan}/{from_date}/{to_date}?apiKey={key}").json()
     if json_data["status"] == "ERROR":
         st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
@@ -26,20 +26,30 @@ def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, t
         f'Average Stock Price of the {timespan}': average_stock_price
         }
         return pd.DataFrame(data)
-
-
+    
 st.header("Welcome to the Multi Select Chart Generator")
-st.subheader("Which company would you like to compare?")
-st.subheader("(choose up to 3)")
-list_of_user_input = st.session_state["list_of_inputs"]
+try:
+    list_of_user_input = st.session_state["list_of_inputs"]
+except KeyError:
+    st.error('The requested key does not exist in the session state.\n' 
+             'Please go back to the main page to save your preference or try sometime later')
+    st.page_link("Mainpage.py", label="Home", icon="🏠")
+else:
+    st.subheader("Which company would you like to compare?")
+    st.subheader("(choose up to 3)")
 
-options = st.multiselect(
-    'Select the prices that you want to compare',
-    [keys for keys in dict_stocksTicker.keys()],
-    default = list_of_user_input[1], max_selections = 3,
-    )
-st.write('You selected:', options)
-list_of_dict_stocks = []
+    options = st.multiselect(
+        'Select the prices that you want to compare',
+        [keys for keys in dict_stocksTicker.keys()],
+        default = list_of_user_input[1], max_selections = 3,
+        )
+    st.write('You selected:', options)
+    list_of_dict_stocks = []
 
-for items in options:
-    list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0],items, list_of_user_input[2], list_of_user_input[3],list_of_user_input[4], list_of_user_input[5]))
+    if st.button("Generate plot", type="primary"):
+        for items in options:
+            list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0],items, list_of_user_input[2], list_of_user_input[3],list_of_user_input[4], list_of_user_input[5]))
+        
+        df = pd.DataFrame([dict for dict in list_of_dict_stocks])
+        df.set_index('Time', inplace=True)
+        st.line_chart(df)
