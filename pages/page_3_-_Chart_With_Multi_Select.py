@@ -50,7 +50,7 @@ else:
         #This line and below is from chatGPT
         data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
-        st.line_chart(df, color="hello")
+        st.line_chart(df, color="red")
 
 
         
