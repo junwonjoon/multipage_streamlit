@@ -15,10 +15,10 @@ def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, t
     json_data = get(f"https://api.polygon.io/v2/aggs/ticker/{stocksTicker}/range/{multiplier}/{timespan}/{from_date}/{to_date}?apiKey={key}").json()
     if json_data["status"] == "ERROR":
         st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
-        exit
+        exit()
     elif json_data["status"] == "NOT_AUTHORIZED":
         st.write("Sorry, the range you have assigned contain too many steps! Please reduce the range of steps by increasing the multiplier or decrease the date difference")
-        exit
+        exit()
     else:
         average_stock_price = [element["vw"] for element in json_data["results"]]
         the_date_miliseconds = [element["t"] for element in json_data["results"]]
