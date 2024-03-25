@@ -4,7 +4,7 @@ import pandas as pd
 
 st.header("Welcome to The Table Generator")
 try:
-    st.write(f"Here is a table displaying information about {st.session_state["name_of_company"]}")
+    st.write(f'Here is a table displaying information about {st.session_state["name_of_company"]}')
     df = pd.DataFrame(st.session_state["user_input"])
 except KeyError:
     st.error('The requested key does not exist in the session state.\n' 
