@@ -47,11 +47,10 @@ else:
             dfs.append(df)
         st.write(dfs)
         keys = list(dfs[0].keys())
-        # Preparing data for DataFrame creation
+        #This line and below is from chatGPT
         data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
-        # Create a DataFrame
         df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
-        st.line_chart(df, y=["red","blue"])
+        st.line_chart(df, color="hello")
 
 
         
