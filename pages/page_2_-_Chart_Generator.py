@@ -6,17 +6,10 @@ try:
     st.write(f'Here is a chart displaying information about {st.session_state["name_of_company"]}')
     df = pd.DataFrame(st.session_state["user_input"])
 except KeyError:
-    st.error('The requested key does not exist in the session state.\n' 
+    st.error('The requested key does not exist in the session state.\n'
              'Please go back to the main page to save your preference or try sometime later')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
 
 else:
     df.set_index('Time', inplace=True)
     st.line_chart(df)
-
-
-
-
-
-
-

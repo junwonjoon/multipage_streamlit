@@ -2,3 +2,4 @@ streamlit
 polygon-api-client
 datetime
 pandas
+requests
