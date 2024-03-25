@@ -69,7 +69,7 @@ else:
                                                list_of_user_input[3],
                                                list_of_user_input[4], list_of_user_input[5])
             except KeyError:
-                st.error('please reload the page')
+                st.error("Couldn't load the entire dataset. There is currently a problem loading the full set of API")
             else:
                 dfs.append(df)
         keys = list(dfs[0].keys())
