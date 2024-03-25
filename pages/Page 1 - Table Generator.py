@@ -74,8 +74,10 @@ st.write('Timespan multiplier is:', timespan_multiplier_select)
 if st.button("Generate Table", type="primary"):
     data = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
     df = pd.DataFrame(data)
-    df.set_index('Time', inplace=True)
-    st.line_chart(df, color = '#ef4423')
+    st.table(df)
+
+    # df.set_index('Time', inplace=True)
+    # st.line_chart(df, color = '#ef4423')
 
 
 
