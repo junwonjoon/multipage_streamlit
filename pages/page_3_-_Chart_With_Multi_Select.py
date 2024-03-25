@@ -16,7 +16,6 @@ options = st.multiselect(
     )
 st.write('You selected:', options)
 list_of_dict_stocks = []
-for items in options:
-    list_of_dict_stocks.append(generate_stock_dictionary(list_of_user_input[0],items, list_of_user_input[2], list_of_user_input[3],list_of_user_input[4], list_of_user_input[5]))
 
-st.write(list_of_dict_stocks)
+
+st.write(generate_stock_dictionary(list_of_user_input[0],options[0], list_of_user_input[2], list_of_user_input[3],list_of_user_input[4], list_of_user_input[5]))
