@@ -1,7 +1,7 @@
 # multipage_streamlit
 This program demonstrates data science features of streamlit using polygon.io's stock api. 
 The user can get information about stock prices, by running the code here on the website:
-https://junwonjoon-multipage-streamlit-mainpage-h9xfyk.streamlit.app/
+https://wonjoonjunsproject1.streamlit.app/
 
 ## Prerequisites
 pip install -r requirements.txt
