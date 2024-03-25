@@ -9,7 +9,7 @@ st.set_page_config(
     page_title="Multipage App",
     page_icon = ":)"
 )
-def generate_stock_dictionary(dict_stocksTicker:dict, timespan_multiplier_select:int, timespan_select:str,
+def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, timespan_multiplier_select:int, timespan_select:str,
                    start_date_select:datetime, end_date_select:datetime) -> dict:
     key = st.secrets["API_KEY"]
     stocksTicker = dict_stocksTicker[stocksTicker_select]
@@ -85,6 +85,7 @@ if st.button("Save", type="primary"):
         st.session_state["name_of_company"] = stocksTicker_select
         st.session_state["user_input"] = generate_stock_dictionary(
             dict_stocksTicker, 
+            stocksTicker_select,
             timespan_multiplier_select, 
             timespan_select,
             start_date_select, 
