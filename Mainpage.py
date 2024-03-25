@@ -1,6 +1,9 @@
 import streamlit as st
 from requests import get
 import datetime
+import streamlit as st
+import pandas as pd
+
 
 st.set_page_config(
     page_title="Multipage App",
