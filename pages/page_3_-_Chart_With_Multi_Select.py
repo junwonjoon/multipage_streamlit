@@ -48,6 +48,6 @@ else:
         for item in options:
             df = generate_stock_dictionary(dict_stocksTicker, item, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5])
             dfs.append(df)
-        st.write(pd.DataFrame(dfs))
+        st.write(dfs)
 
        
