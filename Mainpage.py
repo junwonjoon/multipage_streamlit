@@ -93,10 +93,8 @@ data = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, 
 
 if "user_input" not in st.session_state:
     st.session_state["user_input"] = ""
-st.button("Save")
-button_status = st.button("Save")
 
-if button_status:
+if st.button("Generate Chart", type="primary"):
     st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
 
 
