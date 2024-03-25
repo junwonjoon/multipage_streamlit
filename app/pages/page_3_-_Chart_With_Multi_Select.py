@@ -43,15 +43,15 @@ def generate_stock_dictionary(dict_stocks_ticker_: dict, stocks_ticker_select: s
 st.header("Welcome to the Multi Select Chart Generator")
 try:
     list_of_user_input = st.session_state["list_of_inputs"]
-    for items in list_of_user_input:
-        assert items is not None
 except KeyError:
     st.error('The requested key does not exist in the session state.\n'
              'Please go back to the main page to save your preference')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
+    exit()
 except AssertionError:
     st.error('The session item does not contain info, please go back to the main page to save your preference')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
+    exit()
 else:
     st.subheader("Which company would you like to compare?")
     st.subheader("(choose up to 3)")
