@@ -47,7 +47,6 @@ st.title("Main Page")
 st.sidebar.success("Select a page above.")
 
 
-st.title("Stock Price Table Generator")
 dict_stocksTicker ={"Apple Inc.": "AAPL",
                     "Microsoft Corporation": "MSFT",
                     "Amazon.com, Inc.": "AMZN",
@@ -88,6 +87,18 @@ st.write('You selected timespan as ', timespan_select)
 st.subheader("Select the multiplier for the timespan")
 timespan_multiplier_select = st.number_input('Enter the timespan multiplier', 1, step = 1)
 st.write('Timespan multiplier is:', timespan_multiplier_select)
+
+
+data = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
+
+if "user_input" not in st.session_state:
+    st.session_state["user_input"] = ""
+st.button("Save")
+button_status = st.button("Save")
+
+if button_status:
+    st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
+
 
 # today = datetime.datetime.now()
 # two_days_ago = datetime.datetime.now() - datetime.timedelta(days=7)
