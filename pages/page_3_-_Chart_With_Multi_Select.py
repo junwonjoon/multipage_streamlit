@@ -45,12 +45,11 @@ else:
         for item in options:
             df = generate_stock_dictionary(dict_stocksTicker, item, list_of_user_input[2], list_of_user_input[3], list_of_user_input[4], list_of_user_input[5])
             dfs.append(df)
-        st.write(dfs)
         keys = list(dfs[0].keys())
         #This line and below is from chatGPT
         data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
-        st.line_chart(df, color="red")
+        st.line_chart(df)
 
 
         
