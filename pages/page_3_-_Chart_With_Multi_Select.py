@@ -52,7 +52,7 @@ else:
         data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
         st.line_chart(df)
-        st.write(f"series{i} = {options[i]}\t" for i in range(len(options)))
+        st.write(f"series{i} = {options[i]}                   " for i in range(len(options)))
 
 
         
