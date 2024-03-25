@@ -99,19 +99,4 @@ if "user_input" not in st.session_state:
 if st.button("Save", type="primary"):
     st.session_state["user_input"] = generate_stock_dictionary(dict_stocksTicker, timespan_multiplier_select, timespan_select,start_date_select, end_date_select, key)
 
-# today = datetime.datetime.now()
-# two_days_ago = datetime.datetime.now() - datetime.timedelta(days=7)
-
-# if displayDelta("AAPL", str(two_days_ago.strftime('%Y-%m-%d')), str(today.strftime('%Y-%m-%d'))) != 0:
-#     displayDelta("GOOGL", str(two_days_ago.strftime('%Y-%m-%d')), str(today.strftime('%Y-%m-%d')))
-
-
-
-
-
-
-
-
-
-
 
