@@ -22,7 +22,7 @@ def generate_stock_dictionary(dict_stocksTicker:dict, stocksTicker_select:str, t
         the_date_miliseconds = [element["t"] for element in json_data["results"]]
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element in the_date_miliseconds]
         data = {
-        'Time': pd.to_datetime(human_readable_date),
+        'Time': human_readable_date,
         "price": average_stock_price
         }
         return data
