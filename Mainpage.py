@@ -108,6 +108,8 @@ if st.button("Save", type="primary"):
         st.write("Your choice have been saved, now navigate to different page to view your results")
         st.page_link("pages/Page_1_-_Table_Generator.py", label="Table", icon="📊")
         st.page_link("pages/page_2_-_Chart_Generator.py", label="Chart", icon="📈")
+        st.page_link("page_3_-_Chart_With_Multi_Select.py", label="Multichart", icon="📈📈📈")
+
 
 
 
