@@ -84,7 +84,8 @@ else:
             except KeyError:
                 st.error("Couldn't load the entire dataset. There is currently a problem loading the full set of API")
             except Exception:
-                st.error("Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
+                st.error("Refresh the page please. "
+                         "Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
                 raise RuntimeError
             else:
                 dfs.append(df)
@@ -96,7 +97,8 @@ else:
             st.write("Error in converting the data, please try again a minute later!")
             raise RuntimeError
         except Exception:
-            st.error("Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
+            st.error("Refresh the page please. "
+                     "Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
             raise RuntimeError
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
