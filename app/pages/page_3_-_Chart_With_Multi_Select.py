@@ -52,8 +52,8 @@ st.header("Welcome to the Multi Select Chart Generator")
 try:
     list_of_user_input = st.session_state["list_of_inputs"]
 except KeyError:
-    st.error('The requested key does not exist in the session state.\n'
-             'Please go back to the main page to save your preference')
+    st.error('The perimeter of the graph does not exist in the session state.\n'
+             'Please go back to the main page to save your preference and define perimeter for the graph.')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
     exit()
 except AssertionError:
