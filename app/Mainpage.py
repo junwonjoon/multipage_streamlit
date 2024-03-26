@@ -8,6 +8,7 @@ from requests import get
 import datetime
 import streamlit as st
 import pandas as pd
+import sys
 
 st.set_page_config(
     page_title="Wonjoon's Si(mple sto)ck Graph",
@@ -126,17 +127,17 @@ if st.button("Save", type="primary"):
                                               end_date_select]
 
     except RuntimeError:
-        exit()
+        sys.exit(1)
     except KeyError:
         st.error(f"Saving error have occurred: Please refresh the page and try again")
         st.session_state["user_input"] = ""
         st.session_state["name_of_company"] = ""
         st.session_state["list_of_inputs"] = ""
-        exit()
+        sys.exit(1)
     except Exception:
         st.error("Refresh the page please. "
                  "Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
-        exit()
+        sys.exit(1)
     else:
         st.write("Your choice have been saved, now navigate to different page to view your results")
         st.page_link("pages/Page_1_-_Table_Generator.py", label="Table", icon="📊")

@@ -8,6 +8,7 @@ import streamlit as st
 import pandas as pd
 import datetime
 from requests import get
+import sys
 
 
 # It is little different from the main page
@@ -55,16 +56,16 @@ except KeyError:
     st.error('The perimeter of the graph does not exist in the session state.\n'
              'Please go back to the main page to save your preference and define perimeter for the graph.')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
-    exit()
+    sys.exit(1)
 except AssertionError:
     st.error('The session does not contain information, please go back to the main page to save your preference')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
-    exit()
+    sys.exit(1)
 except RuntimeError:
-    exit()
+    sys.exit(1)
 except Exception:
     st.error("Unknown error have occurred please contact junwonjoon41@gmail.com, if the error persists")
-    exit()
+    sys.exit(1)
 else:
     st.subheader("Which company would you like to compare?")
     st.subheader("(choose up to 3)")
@@ -82,7 +83,7 @@ else:
                                                list_of_user_input[3],
                                                list_of_user_input[4], list_of_user_input[5])
             except RuntimeError:
-                exit()
+                sys.exit(1)
             except IndexError:
                 st.error("Please go back to the main page to save the perimeter for the graph.")
             except KeyError:
@@ -98,14 +99,14 @@ else:
         try:
             data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         except RuntimeError:
-            exit()
+            sys.exit(1)
         except KeyError:
             st.write("Error in converting the data, please try again a minute later!")
-            exit()
+            sys.exit(1)
         except Exception:
             st.error("Refresh the page please. "
                      "Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
-            exit()
+            sys.exit(1)
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
             st.line_chart(df)

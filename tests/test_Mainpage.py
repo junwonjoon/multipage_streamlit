@@ -8,6 +8,8 @@ import pytest
 from unittest import TestCase
 from streamlit.testing.v1 import AppTest
 from Mainpage import generate_stock_pd_dataframe, dict_stocks_ticker
+import sys
+
 
 disabled_testAPIkey = "kehuG_96JtRHMrLsocZ10qjzqwHlSpsp"  #please replace this with your own key later. If you want to run tests.
 
@@ -49,6 +51,8 @@ class Test(TestCase):
         df_apple = generate_using_generate_stock_pd_dataframe_apple()
         assert len(df_google['Time']) == len(df_apple['Time']), "The two API's don't match"
         assert len(df_google['Time']) > 0, "The api call did not receive any value"
-        with pytest.raises(RuntimeError):  # Testing for corner case.
+        with pytest.raises(SystemExit) as is_exit_success:  # Testing for corner case.
             generate_stock_pd_dataframe(dict_stocks_ticker, "Apple Inc.", 1, 'day', '2024-01-01', '2024-01-31',
                                         "1")
+        assert is_exit_success.type == SystemExit
+        assert is_exit_success.value.code == 0
