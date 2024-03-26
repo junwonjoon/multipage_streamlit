@@ -79,8 +79,13 @@ else:
                 df = generate_stock_dictionary(list_of_user_input[0], item, list_of_user_input[2],
                                                list_of_user_input[3],
                                                list_of_user_input[4], list_of_user_input[5])
+            except IndexError:
+                st.error("Please go back to the main page to save the perimeter for the graph.")
             except KeyError:
                 st.error("Couldn't load the entire dataset. There is currently a problem loading the full set of API")
+            except Exception:
+                st.error("Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
+                raise RuntimeError
             else:
                 dfs.append(df)
         keys = list(dfs[0].keys())
@@ -91,7 +96,7 @@ else:
             st.write("Error in converting the data, please try again a minute later!")
             raise RuntimeError
         except Exception:
-            st.error("Unknown error have occurred please contact junwonjoon41@gmail.com, if the error persists")
+            st.error("Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
             raise RuntimeError
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
