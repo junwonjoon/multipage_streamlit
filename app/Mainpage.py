@@ -18,7 +18,9 @@ st.set_page_config(
 def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_: str, timespan_multiplier_select_: int,
                                 timespan_select_: str,
                                 start_date_select_: datetime, end_date_select_: datetime,
-                                key: str = st.secrets["API_KEY"]) -> pd.DataFrame:
+                                key: str) -> pd.DataFrame:
+    if key == "0":
+        key = st.secrets["API_KEY"]
     stocks_ticker = dict_stocks_ticker_[stocks_ticker_select_]
     multiplier = timespan_multiplier_select_
     timespan = timespan_select_
@@ -38,9 +40,9 @@ def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_
         exit()
     else:
         average_stock_price = [element["vw"] for element in json_data["results"]]
-        the_date_miliseconds = [element["t"] for element in json_data["results"]]
+        the_date_milliseconds = [element["t"] for element in json_data["results"]]
         human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element
-                               in the_date_miliseconds]
+                               in the_date_milliseconds]
         data = {
             'Time': pd.to_datetime(human_readable_date),
             f'Average Stock Price of the {timespan}': average_stock_price
@@ -106,7 +108,7 @@ if st.button("Save", type="primary"):
             timespan_multiplier_select,
             timespan_select,
             start_date_select,
-            end_date_select
+            end_date_select, "0"
         )
         st.session_state["list_of_inputs"] = [dict_stocks_ticker,
                                               stocksTicker_select,

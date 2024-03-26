@@ -3,3 +3,4 @@ polygon-api-client
 datetime
 pandas
 requests
+pytest
