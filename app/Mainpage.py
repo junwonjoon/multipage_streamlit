@@ -15,6 +15,7 @@ st.set_page_config(
     page_icon="📊"
 )
 
+
 def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_: str, timespan_multiplier_select_: int,
                                 timespan_select_: str,
                                 start_date_select_: datetime, end_date_select_: datetime,
