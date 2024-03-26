@@ -9,9 +9,8 @@ import datetime
 import streamlit as st
 import pandas as pd
 
-
 st.set_page_config(
-    page_title="Wonjoon's Stock Graph",
+    page_title="Wonjoon's Si(mple sto)ck Graph",
     page_icon="📊"
 )
 
@@ -46,7 +45,8 @@ def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_
         else:
             average_stock_price = [element["vw"] for element in json_data["results"]]
             the_date_milliseconds = [element["t"] for element in json_data["results"]]
-            human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element
+            human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for
+                                   element
                                    in the_date_milliseconds]
             data = {
                 'Time': pd.to_datetime(human_readable_date),
@@ -55,9 +55,10 @@ def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_
             return pd.DataFrame(data)
 
 
-st.title("Wonjoon's Stock Graph")
+st.title("Wonjoon's Simple Stock Graph")
 st.caption(
-    "Welcome to my page! However, please keep that in mind that this uses a free API from polygon.io, "
+    "Welcome to my page! This page focuses on displaying simple information about the stock graphs for"
+    " newbies. However, please keep that in mind that this uses a free API from polygon.io, "
     "therefore if you make too many request under one minute, the program might not function. "
     "Also, please keep that in mind that using multi chart is one API call per selection!")
 
