@@ -112,7 +112,6 @@ if st.button("Save", type="primary"):
             start_date_select,
             end_date_select, "0"
         )
-        st.write(st.session_state["user_input"])
         st.session_state["list_of_inputs"] = [dict_stocks_ticker,
                                               stocksTicker_select,
                                               timespan_multiplier_select,
