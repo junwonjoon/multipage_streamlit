@@ -15,7 +15,6 @@ st.set_page_config(
     page_icon="📊"
 )
 
-
 def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_: str, timespan_multiplier_select_: int,
                                 timespan_select_: str,
                                 start_date_select_: datetime, end_date_select_: datetime,
@@ -141,6 +140,6 @@ if st.button("Save", type="primary"):
         sys.exit(1)
     else:
         st.write("Your choice have been saved, now navigate to different page to view your results")
-        st.page_link("pages/Page_1_-_Table_Generator.py", label="Table", icon="📊")
-        st.page_link("pages/page_2_-_Chart_Generator.py", label="Chart", icon="📈")
-        st.page_link("pages/page_3_-_Chart_With_Multi_Select.py", label="Multi Chart", icon="📈")
+        st.page_link("pages/Page_1_Table_Generator.py", label="Table", icon="📊")
+        st.page_link("pages/page_2_Chart_Generator.py", label="Chart", icon="📈")
+        st.page_link("pages/page_3_Chart_With_Multi_Select.py", label="Multi Chart", icon="📈")

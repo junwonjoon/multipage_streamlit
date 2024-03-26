@@ -1,5 +1,5 @@
 """
-This is a page 1
+This is page 1
 Author: Wonjoon Jun
 Date: Mar 25, 2024
 Please view README.md for more information.

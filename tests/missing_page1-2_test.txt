@@ -1,0 +1,3 @@
+The reason for not having test for page 1,2 is because 1 and 2 have functions that are dependent on the session
+state.So, main page must run before in order to test page 1 and 2. To make sure everything worked, I have implemented
+many tests for Mainpage.py

@@ -66,7 +66,7 @@ except RuntimeError:
     sys.exit("Runtime error")
 except Exception:
     st.error("Unknown error have occurred please contact junwonjoon41@gmail.com, if the error persists")
-    sys.exit("Exception")
+    sys.exit("Caught Exception")
 else:
     st.subheader("Which company would you like to compare?")
     st.subheader("(choose up to 3)")
@@ -114,3 +114,5 @@ else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
             st.line_chart(df)
             st.write(f"series{i} = {options[i]}" for i in range(len(options)))
+
+
