@@ -96,8 +96,10 @@ st.subheader("Select the multiplier for the timespan")
 timespan_multiplier_select = st.number_input('Enter the timespan multiplier', 1, step=1)
 st.write('Timespan multiplier is:', timespan_multiplier_select)
 
-if "user_input" not in st.session_state:
+if "user_input" or "name_of_company" or "list_of_inputs" not in st.session_state:
     st.session_state["user_input"] = ""
+    st.session_state["name_of_company"] = ""
+    st.session_state["list_of_inputs"] = ""
 
 if st.button("Save", type="primary"):
     try:
