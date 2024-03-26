@@ -4,6 +4,7 @@ Author: Wonjoon Jun
 Date: Mar 25, 2024
 Please view README.md for more information.
 """
+import pytest
 from unittest import TestCase
 from streamlit.testing.v1 import AppTest
 class Test(TestCase):
