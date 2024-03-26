@@ -55,16 +55,16 @@ except KeyError:
     st.error('The perimeter of the graph does not exist in the session state.\n'
              'Please go back to the main page to save your preference and define perimeter for the graph.')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
-    raise RuntimeError
+    exit()
 except AssertionError:
     st.error('The session does not contain information, please go back to the main page to save your preference')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
-    raise RuntimeError
+    exit()
 except RuntimeError:
     exit()
 except Exception:
     st.error("Unknown error have occurred please contact junwonjoon41@gmail.com, if the error persists")
-    raise RuntimeError
+    exit()
 else:
     st.subheader("Which company would you like to compare?")
     st.subheader("(choose up to 3)")
