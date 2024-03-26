@@ -9,6 +9,7 @@ import datetime
 import streamlit as st
 import pandas as pd
 
+
 st.set_page_config(
     page_title="Wonjoon's Stock Graph",
     page_icon="📊"
@@ -26,28 +27,32 @@ def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_
     timespan = timespan_select_
     from_date = start_date_select_
     to_date = end_date_select_
-
-    json_data = get(
-        f"https://api.polygon.io/v2/aggs/ticker/{stocks_ticker}/range/{multiplier}/"
-        f"{timespan}/{from_date}/{to_date}?apiKey={key}").json()
-    if json_data["status"] == "ERROR":
-        st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
-        exit()
-    elif json_data["status"] == "NOT_AUTHORIZED":
-        st.write(
-            "Sorry, the range you have assigned contain too many steps! Please reduce the range of steps by "
-            "increasing the multiplier or decrease the date difference")
-        exit()
+    try:
+        json_data = get(
+            f"https://api.polygon.io/v2/aggs/ticker/{stocks_ticker}/range/{multiplier}/"
+            f"{timespan}/{from_date}/{to_date}?apiKey={key}").json()
+    except Exception:
+        st.error("Failed to call API")
+        raise RuntimeError
     else:
-        average_stock_price = [element["vw"] for element in json_data["results"]]
-        the_date_milliseconds = [element["t"] for element in json_data["results"]]
-        human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element
-                               in the_date_milliseconds]
-        data = {
-            'Time': pd.to_datetime(human_readable_date),
-            f'Average Stock Price of the {timespan}': average_stock_price
-        }
-        return pd.DataFrame(data)
+        if json_data["status"] == "ERROR":
+            st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
+            raise RuntimeError
+        elif json_data["status"] == "NOT_AUTHORIZED":
+            st.write(
+                "Sorry, the range you have assigned contain too many steps! Please reduce the range of steps by "
+                "increasing the multiplier or decrease the date difference")
+            raise RuntimeError
+        else:
+            average_stock_price = [element["vw"] for element in json_data["results"]]
+            the_date_milliseconds = [element["t"] for element in json_data["results"]]
+            human_readable_date = [datetime.datetime.fromtimestamp(element / 1000).strftime('%Y-%m-%d %H:%M:%S') for element
+                                   in the_date_milliseconds]
+            data = {
+                'Time': pd.to_datetime(human_readable_date),
+                f'Average Stock Price of the {timespan}': average_stock_price
+            }
+            return pd.DataFrame(data)
 
 
 st.title("Wonjoon's Stock Graph")
