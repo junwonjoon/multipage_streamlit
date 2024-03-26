@@ -10,7 +10,7 @@ from streamlit.testing.v1 import AppTest
 from Mainpage import generate_stock_pd_dataframe, dict_stocks_ticker
 
 # please replace this with your own key later. If you want to run tests.
-disabled_testAPIkey = "kehuG_96JtRHMrLsocZ10qjzqwHlSpsp"
+disabled_testAPIkey = ""
 
 
 def generate_using_generate_stock_pd_dataframe_apple():
