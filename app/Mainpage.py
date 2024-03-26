@@ -32,17 +32,17 @@ def generate_stock_pd_dataframe(dict_stocks_ticker_: dict, stocks_ticker_select_
             f"https://api.polygon.io/v2/aggs/ticker/{stocks_ticker}/range/{multiplier}/"
             f"{timespan}/{from_date}/{to_date}?apiKey={key}").json()
     except Exception:
-        st.error("Failed to call API")
-        raise RuntimeError
+        st.error("Failed to call API, Please refresh the page or try again later")
+        sys.exit("API Error")
     else:
         if json_data["status"] == "ERROR":
             st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
-            raise RuntimeError
+            sys.exit("API Error")
         elif json_data["status"] == "NOT_AUTHORIZED":
             st.write(
                 "Sorry, the range you have assigned contain too many steps! Please reduce the range of steps by "
                 "increasing the multiplier or decrease the date difference")
-            raise RuntimeError
+            sys.exit("API Error")
         else:
             average_stock_price = [element["vw"] for element in json_data["results"]]
             the_date_milliseconds = [element["t"] for element in json_data["results"]]
@@ -127,6 +127,7 @@ if st.button("Save", type="primary"):
                                               end_date_select]
 
     except RuntimeError:
+        st.error(f"Runtime error have occurred: Please refresh the page and try again")
         sys.exit(1)
     except KeyError:
         st.error(f"Saving error have occurred: Please refresh the page and try again")

@@ -29,16 +29,16 @@ def generate_stock_dictionary(dict_stocks_ticker_: dict, stocks_ticker_select: s
             f"{timespan}/{from_date}/{to_date}?apiKey={key}").json()
     except Exception:
         st.error("Failed to call API")
-        raise RuntimeError
+        sys.exit("API error")
     else:
         if json_data["status"] == "ERROR":
             st.write("Too many request were created, maximum request is 5 per minute, try again a minute later")
-            raise RuntimeError
+            sys.exit("API error")
         elif json_data["status"] == "NOT_AUTHORIZED":
             st.write(
                 "Sorry, the range you have assigned contain too many steps! Please reduce the range of steps"
                 " by increasing the multiplier or decrease the date difference")
-            raise RuntimeError
+            sys.exit("API error")
         else:
             average_stock_price = [element["vw"] for element in json_data["results"]]
             the_date_milliseconds = [element["t"] for element in json_data["results"]]
@@ -56,16 +56,17 @@ except KeyError:
     st.error('The perimeter of the graph does not exist in the session state.\n'
              'Please go back to the main page to save your preference and define perimeter for the graph.')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
-    sys.exit(1)
+    sys.exit("Key error")
 except AssertionError:
     st.error('The session does not contain information, please go back to the main page to save your preference')
     st.page_link("Mainpage.py", label="Home", icon="🏠")
-    sys.exit(1)
+    sys.exit("Assertion error")
 except RuntimeError:
-    sys.exit(1)
+    st.error(f"Runtime error have occurred: Please refresh the page and try again")
+    sys.exit("Runtime error")
 except Exception:
     st.error("Unknown error have occurred please contact junwonjoon41@gmail.com, if the error persists")
-    sys.exit(1)
+    sys.exit("Exception")
 else:
     st.subheader("Which company would you like to compare?")
     st.subheader("(choose up to 3)")
@@ -83,7 +84,8 @@ else:
                                                list_of_user_input[3],
                                                list_of_user_input[4], list_of_user_input[5])
             except RuntimeError:
-                sys.exit(1)
+                st.error(f"Runtime error have occurred: Please refresh the page and try again")
+                sys.exit("Runtime error")
             except IndexError:
                 st.error("Please go back to the main page to save the perimeter for the graph.")
             except KeyError:
@@ -91,7 +93,7 @@ else:
             except Exception:
                 st.error("Refresh the page please. "
                          "Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
-                raise RuntimeError
+                sys.exit("Runtime error")
             else:
                 dfs.append(df)
         keys = list(dfs[0].keys())
@@ -99,14 +101,15 @@ else:
         try:
             data_for_df = {f'Series{i}': [d[key] for key in keys] for i, d in enumerate(dfs)}
         except RuntimeError:
-            sys.exit(1)
+            st.error(f"Runtime error have occurred: Please refresh the page and try again")
+            sys.exit("Runtime error")
         except KeyError:
             st.write("Error in converting the data, please try again a minute later!")
-            sys.exit(1)
+            sys.exit("Key error")
         except Exception:
             st.error("Refresh the page please. "
                      "Unknown error have occurred. Please contact junwonjoon41@gmail.com, if the error persists")
-            sys.exit(1)
+            sys.exit("Exception")
         else:
             df = pd.DataFrame(data_for_df, index=pd.to_datetime(keys))
             st.line_chart(df)
