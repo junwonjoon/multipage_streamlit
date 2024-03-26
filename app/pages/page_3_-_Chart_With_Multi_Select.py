@@ -14,9 +14,9 @@ from requests import get
 def generate_stock_dictionary(dict_stocks_ticker_: dict, stocks_ticker_select: str, timespan_multiplier_select: int,
                               timespan_select: str,
                               start_date_select: datetime, end_date_select: datetime,
-                              key: str) -> dict:
+                              key: str = "0") -> dict:
     if key == "0":
-        key = st.secrets["API_KEY_3"]
+        key = st.secrets["API_KEY"]
     stocks_ticker = dict_stocks_ticker_[stocks_ticker_select]
     multiplier = timespan_multiplier_select
     timespan = timespan_select
